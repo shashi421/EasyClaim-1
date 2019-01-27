@@ -1,0 +1,56 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button (click)='closeCreatePolicyForm()'>
+        <ion-icon name='close'></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Create Policy - Admin</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style='background-color: #ededed'>
+  <ion-list>
+
+    <form (ngSubmit)='createNewPolicy()' ngNativeValidate>
+      <ion-item >
+        <ion-label>Policy Name</ion-label>
+        <ion-input type="text" maxlength=30 disabled [(ngModel)]='policy.policyName' name='policyName'></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label >Start Date</ion-label>
+        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]='policy.startDate' name='startDate' required></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label >End Date</ion-label>
+        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]='policy.endDate' name='endDate' required></ion-datetime>
+      </ion-item>
+
+      <ion-item >
+        <ion-label>Cost of policy</ion-label>
+        <ion-input type="number" maxlength=30 disabled [(ngModel)]='policy.costOfPolicy' name='costOfPolicy'></ion-input>
+      </ion-item>
+
+      <ion-item >
+        <ion-label>Type Of Policy</ion-label>
+        <ion-select [(ngModel)]='policy.typeOfPolicy' name='typeOfPolicy'>
+          <ion-option value='car'>Car</ion-option>
+          <ion-option value='home'>Home</ion-option>
+          <ion-option value='health'>Health</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <button ion-button type="submit" block>Create New Policy</button>
+
+    </form>
+
+
+  </ion-list>
+</ion-content>

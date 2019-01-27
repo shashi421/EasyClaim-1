@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Policies</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style='background-color: #ededed'>
+
+  <div *ngIf='myPolicies.length > 0'>
+    <ion-card *ngFor='let policy of myPolicies' style='background-color:white' (click)='createClaim(policy.policyId)'>
+      <ion-card-header>
+        <b>{{policy.policyName}}</b>
+      </ion-card-header>
+      <ion-card-content>
+        <h4>
+          <b>Start Date : </b>{{policy.startDate.toDateString()}} </h4>
+        <h4>
+          <b>End Date : </b>{{policy.endDate.toDateString()}} </h4>
+        <h4>
+          <b>Cost Of Policy : </b>$ {{policy.costOfPolicy}} </h4>
+        <h4>
+          <b>Created At : </b>{{policy.createdAt.toDateString()}} </h4>
+        <h4>
+          <b>Type Of Policy : </b>{{policy.typeOfPolicy}} </h4>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf='myPolicies.length === 0'>
+    <ion-title>No policy available, please add new policy</ion-title>
+  </div>
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-header>
+
+    <ion-navbar no-border-bottom >
+      <ion-title>
+        <ion-icon name="logo-euro" style='color: #488aff'></ion-icon> 
+        <span style='color: #488aff'>asyClaim - Admin</span>
+      </ion-title>
+
+    <ion-buttons end>
+        <button ion-button (click)='closeAdmin()'>
+          <ion-icon name='close'></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+    <ion-toolbar  no-border-top >
+      <ion-segment [(ngModel)]="option">
+        <ion-segment-button value="policy">
+          Policy
+        </ion-segment-button>
+        <ion-segment-button value="claim">
+          Approve Claims
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding style='background-color: #ededed'>
+    <div [ngSwitch]="option">
+      <ion-list *ngSwitchCase="'policy'">
+        <page-policy-admin></page-policy-admin>
+      </ion-list>
+  
+      <ion-list *ngSwitchCase="'claim'">
+        <page-approve-claim-admin></page-approve-claim-admin>
+      </ion-list>
+    </div>
+  
+  </ion-content>

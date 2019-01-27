@@ -1,0 +1,24 @@
+<ion-list>
+
+    <form #login="ngForm" (ngSubmit)='onLogin(login)' ngNativeValidate>
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" maxlength=30 name='username' ngModel required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" maxlength=30 name='password' ngModel required></ion-input>
+      </ion-item>
+
+
+      <button ion-button block>Login</button>
+
+      <ion-item>
+        <ion-label>Forget Password,
+          <a href="#" (click)='resetPassword()'>Reset your password?</a>
+        </ion-label>
+      </ion-item>
+    </form>
+
+  </ion-list>

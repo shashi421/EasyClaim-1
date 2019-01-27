@@ -1,0 +1,23 @@
+<div *ngIf='claims.length > 0'>
+
+  <ion-card *ngFor='let claim of claims' style='background-color:white'>
+    <ion-card-header>
+      <b>{{claim.claimName}}</b>
+    </ion-card-header>
+    <ion-card-content>
+      <h4>
+        <b>Type Of Claim : </b>{{claim.typeOfClaim}} </h4>
+      <h4>
+        <b>Policy Id : </b>{{claim.policyId}} </h4>
+      <h4>
+        <b>Created At : </b>{{claim.createdAt.toDateString()}} </h4>
+      <h4>
+        <b>Approve : </b>
+        <ion-toggle disabled checked="false" (ionChange)="approveClaim(claim)" [(ngModel)]='claim.isApproved' name='claim.isApproved'></ion-toggle>
+      </h4>
+    </ion-card-content>
+  </ion-card>
+</div>
+<div *ngIf='claims.length === 0'>
+  <ion-title>No new claims to approve</ion-title>
+</div>

@@ -1,0 +1,24 @@
+<form #user="ngForm" (ngSubmit)='onSignup(user)' ngNativeValidate>
+  <ion-item>
+    <ion-label floating>Username</ion-label>
+    <ion-input type="text" maxlength=30 name='username' ngModel  required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" maxlength=30 name='password' ngModel  required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Date of birth</ion-label>
+    <ion-datetime displayFormat="MMM DD YYYY" name='dob' ngModel  required></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Postcode</ion-label>
+    <ion-input type="number" minlength=6 name='postcode' ngModel  required></ion-input>
+  </ion-item>
+
+  <button ion-button block>Signup</button>
+
+</form>

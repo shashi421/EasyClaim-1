@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>HelpDesk</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #content padding  style='background-color: #ededed'>
+
+  <ion-grid>
+    <ion-row *ngFor="let chat of chats; ">
+      <ion-col>
+        <ion-card *ngIf="chat.from === 'bot'" style='background-color: #afffb2; width: 60%; float: left'>
+          <ion-card-content>
+            {{ chat.msg }}
+          </ion-card-content>
+        </ion-card>
+        <ion-card *ngIf="chat.from === 'user'" style='text-align: right; background-color: #afdbff; width: 60%; float: right'>
+          <ion-card-content>
+            {{ chat.msg }}
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
+
+<ion-footer no-border>
+  <form (ngSubmit)='send()' ngNativeValidate>
+    <ion-item>
+
+      <ion-input type="text" placeholder="Enter something" name='msg' [(ngModel)]='msg' required></ion-input>
+      <button ion-button clear item-right>Send</button>
+
+    </ion-item>
+  </form>
+</ion-footer>

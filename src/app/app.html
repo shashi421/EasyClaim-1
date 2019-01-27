@@ -1,0 +1,29 @@
+<ion-menu [content]="content" swipeEnabled=false>
+  <ion-header>
+    <ion-toolbar>
+      <ion-card>
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="https://s.gravatar.com/avatar/03a6f04062f4bd03e2412f9bc45f29da?size=496&default=retro">
+            </ion-avatar>
+              <h2>Welcome User</h2>
+          </ion-item>
+      </ion-card>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let p of pages" (click)="openPage(p)" menuClose>
+        <ion-icon name={{p.icon_name}} item-start (click)='openPage(p)'></ion-icon>
+        {{p.title}}
+        <ion-icon name="arrow-dropright" item-end></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

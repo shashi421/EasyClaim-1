@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Claim</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style='background-color: #ededed'>
+  <div *ngIf='claims.length > 0'>
+    <ion-card *ngFor='let claim of claims' style='background-color:white'>
+      <ion-card-header>
+        <b>{{claim.claimName}}</b>
+      </ion-card-header>
+      <ion-card-content>
+        <h4>
+          <b>Type Of Claim : </b>{{claim.typeOfClaim}} </h4>
+        <h4>
+          <b>Policy Id : </b>{{claim.policyId}} </h4>
+        <h4>
+          <b>Created At : </b>{{claim.createdAt.toDateString()}} </h4>
+        <h4 *ngIf='claim.isApproved'>
+          <b>Status : </b>
+          <span style='color: green'>Approved</span>
+        </h4>
+        <h4 *ngIf='!claim.isApproved'>
+          <b>Status : </b>
+          <span style='color: red'>Not Yet Approved</span>
+        </h4>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div *ngIf='claims.length === 0'>
+    <ion-title>No claim available, please add new claim</ion-title>
+  </div>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)='createNewClaim()'>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

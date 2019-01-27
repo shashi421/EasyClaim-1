@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar no-border-bottom >
+    <ion-title>
+      <ion-icon name="logo-euro" style='color: #488aff'></ion-icon> 
+      <span style='color: #488aff'>asyClaim</span>
+    </ion-title>
+  </ion-navbar>
+
+  <ion-toolbar  no-border-top >
+    <ion-segment [(ngModel)]="option">
+      <ion-segment-button value="login">
+        Login
+      </ion-segment-button>
+      <ion-segment-button value="signup">
+        Sign Up
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding style='background-color: #ededed'>
+  <div [ngSwitch]="option">
+    <ion-list *ngSwitchCase="'login'">
+      <page-login></page-login>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'signup'">
+      <page-signup></page-signup>
+    </ion-list>
+  </div>
+
+</ion-content>
