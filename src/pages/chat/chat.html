@@ -13,7 +13,10 @@
     <ion-row *ngFor="let chat of chats; ">
       <ion-col>
         <ion-card *ngIf="chat.from === 'bot'" style='background-color: #afffb2; width: 60%; float: left'>
-          <ion-card-content>
+          <ion-card-content *ngIf='chat.msg.startsWith("http")'>
+            <a href={{chat.msg}} onclick='openUrl(chat)'>{{ chat.msg }}</a>
+          </ion-card-content>
+          <ion-card-content *ngIf='!chat.msg.startsWith("http")'>
             {{ chat.msg }}
           </ion-card-content>
         </ion-card>

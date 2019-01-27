@@ -67,14 +67,14 @@ export class CreateClaimPage {
 
         toast = this.toastCtrl.create({
           message: err.error['error message'],
-          duration: 3000,
+          duration: 2000,
           cssClass: 'toastFail',
         })
         toast.present()
       })
 
     toast.onDidDismiss(() =>{
-      this.navCtrl.setRoot(MyClaimPage, {}, {animate: true, direction: 'forward'});
+      this.closeClaimForm()  
     })
     
 

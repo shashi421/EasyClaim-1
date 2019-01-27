@@ -28,6 +28,10 @@ export class ChatPage {
     console.log('ionViewDidLoad ChatPage');
   }
 
+  openUrl(chat: Chat){
+    window.open(chat.msg, '_system')
+  }
+
   send() {
     let chat = new Chat(this.msg, new Date(), 'user')
     this.chats.push(chat)

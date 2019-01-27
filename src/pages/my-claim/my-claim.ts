@@ -3,9 +3,9 @@ import { NavController, NavParams, ModalController, ToastController } from 'ioni
 import { HttpClient } from '@angular/common/http';
 import { Claim } from '../../modals/Claim';
 import { ClaimProvider } from '../../providers/claim/claim';
-import { DashboardPage } from '../dashboard/dashboard';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { Constants } from '../../modals/Constants';
+import { MyPolicyPage } from '../my-policy/my-policy';
 
 @Component({
   selector: 'page-my-claim',
@@ -27,7 +27,7 @@ export class MyClaimPage {
 
   createNewClaim(){
     console.log('createNewClaim MyClaimPage');
-    this.navCtrl.push(DashboardPage)
+    this.navCtrl.push(MyPolicyPage)
   }
 
   ionViewDidLoad() {

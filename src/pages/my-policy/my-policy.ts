@@ -7,6 +7,7 @@ import { CreateClaimPage } from '../create-claim/create-claim';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Constants } from '../../modals/Constants';
+import { MyClaimPage } from '../my-claim/my-claim';
 
 @Component({
   selector: 'page-my-policy',
@@ -33,7 +34,12 @@ export class MyPolicyPage {
   createClaim(id: any) {
     console.log('Policy Id : ' + id);
     sessionStorage.setItem('policyId', id)
-    this.modalCtrl.create(CreateClaimPage).present();
+    let modal = this.modalCtrl.create(CreateClaimPage)
+    modal.present();
+
+    modal.onDidDismiss(data=>{
+      this.navCtrl.setRoot(MyClaimPage);
+    })
   }
 
   ionViewDidLoad() {
