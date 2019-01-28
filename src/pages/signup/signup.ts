@@ -48,8 +48,9 @@ export class SignupPage {
         console.log('Error ', err)
 
         let toastFail = this.toastCtrl.create({
-          message: err.error['error message'],
+          message: err.error['error'],
           cssClass: 'toastFail',
+          duration: 2000
         })
         toastFail.present()
       })

@@ -1,0 +1,46 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-buttons end>
+        <button ion-button (click)='closeClaimForm()'>
+          <ion-icon name='close'></ion-icon>
+        </button>
+      </ion-buttons>
+  
+      <ion-title>Update Claim</ion-title>
+  
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding style='background-color: #ededed'>
+    <ion-list>
+  
+      <form (ngSubmit)='updateClaim()' ngNativeValidate>
+        <ion-item >
+          <ion-label>Policy Id</ion-label>
+          <ion-input type="text" maxlength=30 disabled [(ngModel)]='claim.policyId' name='policyId'></ion-input>
+        </ion-item>
+  
+        <ion-item >
+          <ion-label>Claim Name</ion-label>
+          <ion-input type="text" maxlength=30 required [(ngModel)]='claim.claimName' name='claimName'></ion-input>
+        </ion-item>
+  
+        <ion-item >
+          <ion-label>Type Of Claim</ion-label>
+          <ion-select [(ngModel)]='claim.typeOfClaim' name='typeOfClaim'>
+            <ion-option value='car'>Car</ion-option>
+            <ion-option value='home'>Home</ion-option>
+            <ion-option value='health'>Health</ion-option>
+          </ion-select>
+        </ion-item>
+  
+        <button ion-button type="submit" block>Update Claim</button>
+  
+      </form>
+  
+  
+    </ion-list>
+  </ion-content>

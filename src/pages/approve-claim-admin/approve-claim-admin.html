@@ -12,8 +12,11 @@
       <h4>
         <b>Created At : </b>{{claim.createdAt.toDateString()}} </h4>
       <h4>
-        <b>Approve : </b>
-        <ion-toggle disabled checked="false" (ionChange)="approveClaim(claim)" [(ngModel)]='claim.isApproved' name='claim.isApproved'></ion-toggle>
+        <ion-item>
+          <ion-label>Approve ?</ion-label>
+          <ion-toggle checked="false" [(ngModel)]='claim.isApproved' name='claim.isApproved' (ionChange)="approveClaimIsSure(claim)" ></ion-toggle>
+
+        </ion-item>
       </h4>
     </ion-card-content>
   </ion-card>

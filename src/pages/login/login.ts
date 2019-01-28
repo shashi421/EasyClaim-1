@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule  } from '@angular/common/http';
 
 import { ForgetPasswordPage } from '../forget-password/forget-password';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
@@ -59,7 +59,14 @@ export class LoginPage {
 
       loading.present().then(() => {
 
-        this.http.post(Constants.BASE_URL + '/user/login/', JSON.stringify(data))
+        const httpOptions = {
+          headers: new HttpHeaders({ 
+            'Access-Control-Allow-Origin':'*',
+            'Access-Control-Allow-Headers': 'Origin'
+          })
+        };
+
+        this.http.post(Constants.BASE_URL + '/user/login/', JSON.stringify(data), httpOptions)
           .subscribe(resp => {
             console.log('resp ', resp);
             sessionStorage.setItem('user', JSON.stringify(resp))
@@ -71,8 +78,7 @@ export class LoginPage {
             toast = this.toastCtrl.create({
               message: err.error['error message'],
               cssClass: 'toastFail',
-              showCloseButton: true,
-              closeButtonText: 'Ok'
+              duration: 2000
             })
             toast.present()
           })

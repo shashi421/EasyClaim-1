@@ -63,7 +63,7 @@ export class MyPolicyPage {
     loadingMyPolicies.present().then(() => {
       //Fetch All Subscribed Policies)
      console.log('jsonData', JSON.stringify(data))
-      this.http.post(Constants.BASE_URL+'/insurance/getallpolicy/', JSON.stringify(data))
+      this.http.post(Constants.BASE_URL+'/insurance/getallpolicyforuser/', JSON.stringify(data))
         .subscribe((resp: Policy[]) => {
           console.log('resp ', resp);
           resp.map(policy => {

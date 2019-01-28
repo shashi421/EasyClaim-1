@@ -20,22 +20,22 @@
     <form (ngSubmit)='createNewPolicy()' ngNativeValidate>
       <ion-item >
         <ion-label>Policy Name</ion-label>
-        <ion-input type="text" maxlength=30 disabled [(ngModel)]='policy.policyName' name='policyName'></ion-input>
+        <ion-input type="text" maxlength=30 [(ngModel)]='policy.policyName' name='policyName'></ion-input>
       </ion-item>
       
       <ion-item>
         <ion-label >Start Date</ion-label>
-        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]='policy.startDate' name='startDate' required></ion-datetime>
+        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]='policy.startDate' name='startDate'  max="2050-10-31" required></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label >End Date</ion-label>
-        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]='policy.endDate' name='endDate' required></ion-datetime>
+        <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]='policy.endDate' name='endDate'  max="2050-10-31" required></ion-datetime>
       </ion-item>
 
       <ion-item >
-        <ion-label>Cost of policy</ion-label>
-        <ion-input type="number" maxlength=30 disabled [(ngModel)]='policy.costOfPolicy' name='costOfPolicy'></ion-input>
+        <ion-label>Cost of policy $</ion-label>
+        <ion-input type="number" maxlength=30  [(ngModel)]='policy.costOfPolicy' name='costOfPolicy' required></ion-input>
       </ion-item>
 
       <ion-item >

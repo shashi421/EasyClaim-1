@@ -19,34 +19,39 @@ export class ApproveClaimAdminPage {
     public navParams: NavParams,
     private alertCtrl: AlertController,
     private http: HttpClient) {
+
+      //fetch all claims to approved from db
+    this.http.get(Constants.BASE_URL + '/claim/getclaimsforadmin/')
+    .subscribe((resp: Claim[]) => {
+      console.log('resp ', resp);
+      resp.map(claim => {
+        claim.createdAt = new Date(claim.createdAt) 
+        this.claims.push(claim)
+      })
+      console.log('this.claims ', this.claims)
+      
+    }, err => {
+      console.log('Error ', err)
+    })
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ApproveClaimAdminPage');
 
-    //fetch all claims to approved from db
-    this.http.get(Constants.BASE_URL + '/claim/getclaimsforadmin/')
-        .subscribe((resp: Claim[]) => {
-          console.log('resp ', resp);
-          resp.map(claim => {
-            claim.createdAt = new Date(claim.createdAt) 
-            this.claims.push(claim)
-          })
-          console.log('this.claims ', this.claims)
-          
-        }, err => {
-          console.log('Error ', err)
-        })
   }
 
   approveClaim(claim: Claim) {
     console.log('approveClaim ApproveClaimAdminPage ', claim)
-    if (this.approveConfirm(claim)) {
-      claim.isApproved = true
+    this.approveConfirm(claim)
+  }
+
+  approveClaimIsSure(claim: Claim){
+    claim.isApproved = true
 
       //save in DB
       console.log('jsonData', JSON.stringify(claim))
-      this.http.post(Constants.BASE_URL + '/claim/updateclaim/', JSON.stringify(claim))
+      this.http.put(Constants.BASE_URL + '/claim/updateclaim/', JSON.stringify(claim))
         .subscribe(resp => {
           console.log('resp ', resp);
           //remove from Array
@@ -54,9 +59,6 @@ export class ApproveClaimAdminPage {
         }, err => {
           console.log('Error ', err)
         })
-
-
-    }
   }
 
   approveConfirm(claim: Claim) {
@@ -69,14 +71,13 @@ export class ApproveClaimAdminPage {
           text: 'Disagree',
           handler: () => {
             console.log('Disagree clicked');
-            return false
           }
         },
         {
           text: 'Agree',
           handler: () => {
             console.log('Agree clicked');
-            return true
+            this.approveClaimIsSure(claim)
           }
         }
       ]

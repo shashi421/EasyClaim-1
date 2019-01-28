@@ -3,6 +3,9 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Policy } from '../../modals/Policy';
 import { HttpClient } from '@angular/common/http';
 import { Constants } from '../../modals/Constants';
+import { HomePage } from '../home/home';
+import { PolicyAdminPage } from '../policy-admin/policy-admin';
+import { AdminHomePage } from '../admin-home/admin-home';
 
 
 @Component({
@@ -11,23 +14,21 @@ import { Constants } from '../../modals/Constants';
 })
 export class CreatePolicyAdminPage {
 
-  policy: Policy
+  policy: Policy= new Policy()
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public toastCtrl: ToastController,
     public http: HttpClient) {
-  }
+    }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CreatePolicyAdminPage');
-
-    this.policy = new Policy();
   }
 
   closeCreatePolicyForm(){
     console.log('closeCreatePolicyForm CreatePolicyAdminPage')
-    this.navCtrl.pop()
+    this.navCtrl.setRoot(HomePage)
   }
 
   createNewPolicy(){
@@ -40,8 +41,8 @@ export class CreatePolicyAdminPage {
       cssClass: 'toastSuccess',
       duration: 2000,
     })
-  
-    this.http.post(Constants.BASE_URL+'/insurance/createpolicy/', JSON.stringify(this.policy))
+
+    this.http.post(Constants.BASE_URL+'/insurance/createpolicyforadmin/', JSON.stringify(this.policy))
     .subscribe(resp => {
       console.log('resp ', resp);
       toastSuccess.present()
@@ -56,7 +57,7 @@ export class CreatePolicyAdminPage {
       })
 
       toastSuccess.onDidDismiss(()=>{
-        this.navCtrl.pop()
+        this.navCtrl.setRoot(AdminHomePage)
       })
   }
 

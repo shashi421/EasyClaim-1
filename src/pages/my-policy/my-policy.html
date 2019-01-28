@@ -11,8 +11,9 @@
 
 
 <ion-content padding style='background-color: #ededed'>
-
   <div *ngIf='myPolicies.length > 0'>
+
+    <h3>Select a Policy to raise claim</h3>
     <ion-card *ngFor='let policy of myPolicies' style='background-color:white' (click)='createClaim(policy.policyId)'>
       <ion-card-header>
         <b>{{policy.policyName}}</b>

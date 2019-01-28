@@ -23,6 +23,7 @@ import { AdminHomePage } from '../pages/admin-home/admin-home';
 import { PolicyAdminPage } from '../pages/policy-admin/policy-admin';
 import { ApproveClaimAdminPage } from '../pages/approve-claim-admin/approve-claim-admin';
 import { CreatePolicyAdminPage } from '../pages/create-policy-admin/create-policy-admin';
+import { UpdateClaimPage } from '../pages/update-claim/update-claim';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CreatePolicyAdminPage } from '../pages/create-policy-admin/create-polic
     AdminHomePage,
     PolicyAdminPage,
     ApproveClaimAdminPage,
-    CreatePolicyAdminPage
+    CreatePolicyAdminPage,
+    UpdateClaimPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { CreatePolicyAdminPage } from '../pages/create-policy-admin/create-polic
     AdminHomePage,
     PolicyAdminPage,
     ApproveClaimAdminPage,
-    CreatePolicyAdminPage
+    CreatePolicyAdminPage,
+    UpdateClaimPage
   ],
   providers: [
     StatusBar,

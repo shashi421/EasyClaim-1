@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 
 @Component({
@@ -20,6 +21,6 @@ export class AdminHomePage {
   closeAdmin() {
     console.log('closeAdmin AdminHomePage');
     sessionStorage.clear();
-    this.navCtrl.pop()
+    this.navCtrl.setRoot(HomePage)
   }
 }

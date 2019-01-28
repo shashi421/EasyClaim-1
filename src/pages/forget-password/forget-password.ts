@@ -68,8 +68,7 @@ export class ForgetPasswordPage {
         let toastFail = this.toastCtrl.create({
           message: err.error['error message'],
           cssClass: 'toastFail',
-          showCloseButton: true,
-          closeButtonText: 'Ok'
+          duration: 2000
         })
         toastFail.present()
       })
@@ -102,15 +101,14 @@ export class ForgetPasswordPage {
 
             let data = {
               user_id: user_id,
-              password: password
+              password: password.Password
             }
             console.log('data ', data)
 
             let toastSuccess = this.toastCtrl.create({
               message: 'Password updated successfully',
               cssClass: 'toastSuccess',
-              showCloseButton: true,
-              closeButtonText: 'Ok'
+              duration: 2000
             })
 
             this.http.put(Constants.BASE_URL+'/user/update/', JSON.stringify(data))
@@ -124,6 +122,7 @@ export class ForgetPasswordPage {
                 let toastUpdateFail = this.toastCtrl.create({
                   message: err.error['error message'],
                   cssClass: 'toastFail',
+                  duration: 2000
                 })
                 toastUpdateFail.present()
               })

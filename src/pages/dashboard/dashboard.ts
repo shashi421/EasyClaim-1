@@ -31,7 +31,7 @@ export class DashboardPage {
     private toastCtrl: ToastController,
     private alertCtrl: AlertController
   ) {
-    }
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
@@ -55,17 +55,23 @@ export class DashboardPage {
       //Fetch All Upcoming Policies)
       //this.newPolicies = this.policyService.getAllNewPolicy();
       console.log('jsonData', JSON.stringify(data))
-      this.http.post(Constants.BASE_URL+'/insurance/getallnewpolicy/', JSON.stringify(data))
-        .subscribe(resp => {
+      this.http.post(Constants.BASE_URL + '/insurance/getallnewpolicy/', JSON.stringify(data))
+        .subscribe((resp: Policy[]) => {
           console.log('resp ', resp);
-          //this.newPolicies = this.newPolicies.concat(resp)
+          resp.map(policy => {
+            policy.startDate = new Date(policy.startDate)
+            policy.endDate = new Date(policy.endDate)
+            policy.createdAt = new Date(policy.createdAt)
+            this.newPolicies.push(policy)
+            console.log('Policy ', policy)
+          })
+          console.log('this.myPolicies ', this.newPolicies)
         }, err => {
           console.log('Error ', err)
           toastFail = this.toastCtrl.create({
             message: err.error['error message'],
             cssClass: 'toastFail',
-            showCloseButton: true,
-            closeButtonText: 'Ok'
+            duration: 2000
           })
 
           errorFound = true
@@ -83,48 +89,53 @@ export class DashboardPage {
     console.log('Policy Id : ' + id);
 
     //Confirming user wants to add policy
-    if (this.isConfirmedToAdd(name)) {
-
-      //Fetch username from session
-      let user = sessionStorage.getItem('user')
-      this.username = JSON.parse(user).user_id
-
-      let data = {
-        policyId: id,
-        user_id: this.username
-      }
-      console.log('jsonData ', JSON.stringify(data))
-
-      let toastSuccess = this.toastCtrl.create({
-        message: 'Policy added',
-        cssClass: 'toastSuccess',
-        duration: 2000,
-      })
-
-      this.http.post('https://policyclaim.herokuapp.com/insurance/addnewpolicy/', JSON.stringify(data))
-        .subscribe(resp => {
-          console.log('resp ', resp);
-          toastSuccess.present()
-        }, err => {
-          console.log('Error ', err)
-
-          let toastFail = this.toastCtrl.create({
-            message: err.error['error message'],
-            cssClass: 'toastFail',
-            showCloseButton: true,
-            closeButtonText: 'Ok'
-          })
-          toastFail.present()
-        })
-
-      toastSuccess.onDidDismiss(() => {
-        this.navCtrl.setRoot(MyPolicyPage)
-      })
-    }
+    this.isConfirmedToAdd(id, name)
   }
 
+  addPolicyToMyList(id){
+    //Fetch username from session
+    let user = sessionStorage.getItem('user')
+    this.username = JSON.parse(user).user_id
 
-  isConfirmedToAdd(policyName) {
+    let data = {
+      policyId: id,
+      user_id: this.username
+    }
+    console.log('jsonData ', JSON.stringify(data))
+
+    let toastSuccess = this.toastCtrl.create({
+      message: 'Policy added',
+      cssClass: 'toastSuccess',
+      duration: 2000,
+    })
+
+    this.http.post(Constants.BASE_URL+'/insurance/createpolicy/', JSON.stringify(data))
+      .subscribe((resp:Policy) => {
+        console.log('resp ', resp);
+        toastSuccess.present()
+
+        //remove from array
+        //this.newPolicies = this.newPolicies.filter((policyFromArr) => policyFromArr.policyId !== id)
+        this.navCtrl.setRoot(MyPolicyPage);
+
+      }, err => {
+        console.log('Error ', err)
+
+        let toastFail = this.toastCtrl.create({
+          message: err.error['error message'],
+          cssClass: 'toastFail',
+          duration: 2000
+        })
+        toastFail.present()
+
+      })
+
+    toastSuccess.onDidDismiss(() => {
+      this.navCtrl.setRoot(MyPolicyPage)
+    })
+  }
+
+  isConfirmedToAdd(policyId, policyName) {
     const confirm = this.alertCtrl.create({
       title: 'Policy : ' + policyName,
       message: 'Do you want to add this policy in your list ? ',
@@ -133,14 +144,15 @@ export class DashboardPage {
           text: 'Disagree',
           handler: () => {
             console.log('Disagree clicked');
-            return false;
+            
           }
         },
         {
           text: 'Agree',
           handler: () => {
             console.log('Agree clicked');
-            return true
+            this.addPolicyToMyList(policyId)
+            this.navCtrl.setRoot(MyPolicyPage)
           }
         }
       ]

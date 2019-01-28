@@ -18,14 +18,22 @@ export class PolicyAdminPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private alertCtrl: AlertController,
-    private http: HttpClient) {
+    private http: HttpClient) 
+    {
+      console.log('ionViewDidLoad PolicyAdminPage constructor');
+      this.fetchPolicies()
   }
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PolicyAdminPage');
+    
+  }
 
+  fetchPolicies(){
     //fetch all policies available
-    this.http.get(Constants.BASE_URL + '/claim/getallpolicy/')
+    this.http.get(Constants.BASE_URL + '/insurance/getallpolicyforadmin/')
         .subscribe((resp: Policy[]) => {
           console.log('resp ', resp);
           resp.map(policy => {
