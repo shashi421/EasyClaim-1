@@ -1,0 +1,73 @@
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import {HttpClient} from '@angular/common/http'
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+export class HomePage {
+
+  msg:string = ''
+  response:string = ''
+  intend:string = ''
+
+  private baseURL: string = "https://api.dialogflow.com/v1/query?v=20150910";
+
+  constructor(
+    public navCtrl: NavController, 
+    private http: HttpClient) {
+  }
+
+  getResponse(query: string){
+    let data = {
+      query : this.msg,
+      lang: 'en',
+      sessionId: '12345'
+    }
+    this.http
+      .post(this.baseURL, data, 
+      {headers:{'Authorization' :'Bearer 3815a79bcf744432bd6b0db1a1604253'}})
+      .subscribe((res:any) => {
+        console.log(res)
+        this.response = res.result.fulfillment.speech
+        this.intend = res.result.metadata.intentName
+        this.handleIntent(this.intend)
+        this.handleIntent(this.intend)
+      })
+  }
+
+  handleIntent(intent:string){
+    if(intent === 'botName'){
+      console.log('botName')
+    }
+    else if(intent === 'claimCreate'){
+      console.log('claimCreate')
+    }
+    else if(intent === 'DefaultFallback'){
+      console.log('DefaultFallback')
+    }
+    else if(intent === 'DefaultWelcome'){
+      console.log('DefaultWelcome')
+    }
+    else if(intent === 'get_all_claim'){
+      console.log('get_all_claim')
+    }else if(intent === 'get_claim_status_by_id'){
+      console.log('get_claim_status_by_id')
+    }
+    else if(intent === 'update_claim_with_id'){
+      console.log('update_claim_with_id')
+    }
+    else if(intent === 'update_claim_without_id'){
+      console.log('update_claim_without_id')
+    }
+    else if(intent === 'MyPolicy'){
+      console.log('get_claim_status_by_id')
+    }
+    else if(intent === 'BuyProducts'){
+      console.log('BuyProducts')
+    }
+  }
+
+
+}
